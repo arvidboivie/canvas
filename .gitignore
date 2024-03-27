@@ -1,0 +1,15 @@
+# Yarn
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Build artifacts
+src/main.js
+src/main.js.map
+
+# Stuff
+.DS_STORE
