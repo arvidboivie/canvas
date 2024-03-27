@@ -11,5 +11,7 @@
 src/main.js
 src/main.js.map
 
+node_modules
+
 # Stuff
 .DS_STORE
