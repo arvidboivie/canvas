@@ -5,6 +5,10 @@ class Game {
   private readonly HEIGHT = 16;
   private readonly SQUARE_SIDE = 20;
   private PLAY = true;
+  private readonly FPS = 1;
+
+  private secondsPassed: number = 0;
+  private previousGameLoop: number = 0;
 
   private readonly canvas: HTMLCanvasElement;
   private readonly infoWindow: HTMLParagraphElement;
@@ -50,17 +54,6 @@ class Game {
 
     const square = this.world[squareX][squareY];
 
-    // const colors = ['green', 'red', 'blue'];
-
-    // this.ctx.fillStyle = colors[Math.floor(Math.random() * 3)];
-    // this.ctx.fillRect(
-    //   squareX * this.SQUARE_SIDE,
-    //   squareY * this.SQUARE_SIDE,
-    //   this.SQUARE_SIDE,
-    //   this.SQUARE_SIDE
-    // );
-
-    console.log(square);
     this.infoWindow.textContent = `${square}`;
     this.world[squareX][squareY] = !square;
     this.draw();
@@ -72,10 +65,18 @@ class Game {
     );
   }
 
-  private loop = () => {
-    if (this.PLAY) {
-      this.world = this.populateWorld();
+  private loop = (timestamp: number) => {
+    this.secondsPassed = (timestamp - this.previousGameLoop) / 1000;
+
+    if (this.secondsPassed - this.previousGameLoop > 1 / this.FPS) {
+      if (this.PLAY) {
+        this.world = this.populateWorld();
+      }
+      this.previousGameLoop = this.secondsPassed;
     }
+
+    console.log(this);
+
     this.draw();
     requestAnimationFrame(this.loop);
   };
