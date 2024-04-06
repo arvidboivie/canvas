@@ -1,4 +1,5 @@
-import { getRealMousePosition } from './helpers';
+import { getRealMousePosition } from './helpers/get-real-mouse-position.helper';
+import { World } from './world/world';
 
 class Game {
   private readonly WIDTH = 24;
@@ -15,7 +16,7 @@ class Game {
   private readonly pauseButton: HTMLButtonElement;
   private readonly ctx: CanvasRenderingContext2D;
 
-  private world: boolean[][] = [];
+  private world: World;
 
   constructor() {
     this.infoWindow = document.createElement(`p`);
@@ -31,6 +32,12 @@ class Game {
       throw new Error('Failed to get canvas context');
     }
     this.ctx = contextOrNull;
+    // The size of the emoji is set with the font
+    this.ctx.font = `${this.SQUARE_SIDE}px serif`;
+    // use these alignment properties for "better" positioning
+    this.ctx.textAlign = 'center';
+    this.ctx.textBaseline = 'middle';
+
     this.canvas.addEventListener('mouseup', this.releaseEventHandler);
     this.pauseButton.addEventListener('click', () => {
       this.PLAY = !this.PLAY;
@@ -41,8 +48,9 @@ class Game {
     document.body.appendChild(this.infoWindow);
     document.body.appendChild(this.pauseButton);
 
-    this.world = this.populateWorld();
-    // this.draw();
+    this.world = new World();
+    this.world.populate();
+
     requestAnimationFrame(this.loop);
   }
 
@@ -52,45 +60,35 @@ class Game {
     const squareX = Math.floor(x / this.SQUARE_SIDE);
     const squareY = Math.floor(y / this.SQUARE_SIDE);
 
-    const square = this.world[squareX][squareY];
+    const square = this.world.getPos(squareX, squareY);
 
-    this.infoWindow.textContent = `${square}`;
-    this.world[squareX][squareY] = !square;
+    this.infoWindow.textContent = `${squareX}, ${squareY} ${square.entities
+      .map((entity) => entity.name)
+      .join(' ')}`;
+
     this.draw();
   };
-
-  private populateWorld(): boolean[][] {
-    return [...Array(this.WIDTH)].map(() =>
-      [...Array(this.HEIGHT)].map(() => (Math.random() > 0.5 ? true : false))
-    );
-  }
 
   private loop = (timestamp: number) => {
     this.secondsPassed = (timestamp - this.previousGameLoop) / 1000;
 
     if (this.secondsPassed - this.previousGameLoop > 1 / this.FPS) {
       if (this.PLAY) {
-        this.world = this.populateWorld();
+        // this.world.populate();
       }
       this.previousGameLoop = this.secondsPassed;
     }
-
-    console.log(this);
 
     this.draw();
     requestAnimationFrame(this.loop);
   };
 
-  public draw() {
+  private draw() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     for (let x = 0; x < this.WIDTH; x++) {
       for (let y = 0; y < this.HEIGHT; y++) {
-        this.ctx.fillStyle = this.world[x][y] ? 'black' : 'white';
-        this.ctx.fillRect(
-          x * this.SQUARE_SIDE,
-          y * this.SQUARE_SIDE,
-          this.SQUARE_SIDE,
-          this.SQUARE_SIDE
-        );
+        let entity = this.world.getPos(x, y);
+        entity.draw(this.ctx)(this.SQUARE_SIDE);
       }
     }
   }
