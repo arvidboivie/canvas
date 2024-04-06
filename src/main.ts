@@ -38,8 +38,8 @@ class Game {
     document.body.appendChild(this.pauseButton);
 
     this.world = this.populateWorld();
-    this.draw();
-    // requestAnimationFrame(this.loop);
+    // this.draw();
+    requestAnimationFrame(this.loop);
   }
 
   private releaseEventHandler = (event: MouseEvent) => {
@@ -50,20 +50,20 @@ class Game {
 
     const square = this.world[squareX][squareY];
 
-    const colors = ['green', 'red', 'blue'];
+    // const colors = ['green', 'red', 'blue'];
 
-    this.ctx.fillStyle = colors[Math.floor(Math.random() * 3)];
-    this.ctx.fillRect(
-      squareX * this.SQUARE_SIDE,
-      squareY * this.SQUARE_SIDE,
-      this.SQUARE_SIDE,
-      this.SQUARE_SIDE
-    );
+    // this.ctx.fillStyle = colors[Math.floor(Math.random() * 3)];
+    // this.ctx.fillRect(
+    //   squareX * this.SQUARE_SIDE,
+    //   squareY * this.SQUARE_SIDE,
+    //   this.SQUARE_SIDE,
+    //   this.SQUARE_SIDE
+    // );
 
     console.log(square);
-    // this.infoWindow.textContent = `${square}`;
-    // this.world[squareX][squareY] = !square;
-    // this.draw();
+    this.infoWindow.textContent = `${square}`;
+    this.world[squareX][squareY] = !square;
+    this.draw();
   };
 
   private populateWorld(): boolean[][] {
@@ -72,12 +72,13 @@ class Game {
     );
   }
 
-  // private loop = () => {
-  //   if (this.PLAY) {
-  //     this.draw();
-  //     requestAnimationFrame(this.loop);
-  //   }
-  // };
+  private loop = () => {
+    if (this.PLAY) {
+      this.world = this.populateWorld();
+    }
+    this.draw();
+    requestAnimationFrame(this.loop);
+  };
 
   public draw() {
     for (let x = 0; x < this.WIDTH; x++) {
