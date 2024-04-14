@@ -60,7 +60,7 @@ class Game {
     const squareX = Math.floor(x / this.SQUARE_SIDE);
     const squareY = Math.floor(y / this.SQUARE_SIDE);
 
-    const entities = this.world.getPos(squareX, squareY);
+    const entities = this.world.getPos({ x: squareX, y: squareY });
 
     this.infoWindow.textContent = `${squareX}, ${squareY} ${entities
       .map((entity) => entity.type)

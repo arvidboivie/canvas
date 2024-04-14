@@ -1,13 +1,15 @@
-import { Behaviour } from '../types/behaviours.type';
-import { EntityType } from '../types/entity-types.type';
+import { randomMove } from '../helpers/random-move.helper';
 import { Entity } from './entity';
 
 export class Sheep extends Entity {
   readonly type = `SHEEP`;
   readonly symbol = '🐑';
 
-  readonly interactions: Record<EntityType, Behaviour> = {
-    SHEEP: 'IGNORE',
-    WOLF: 'IGNORE',
-  };
+  act() {
+    const targetPos = randomMove(this.position);
+
+    if (this.world.tryGetPos(targetPos)) {
+      this.position = randomMove(this.position);
+    }
+  }
 }
