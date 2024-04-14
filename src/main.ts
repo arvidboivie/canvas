@@ -63,7 +63,7 @@ class Game {
     const entities = this.world.getPos({ x: squareX, y: squareY });
 
     this.infoWindow.textContent = `${squareX}, ${squareY} ${entities
-      .map((entity) => entity.name)
+      .map((entity) => entity.type)
       .join(' ')}`;
 
     this.draw();

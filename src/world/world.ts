@@ -1,8 +1,10 @@
-import { Entity } from '../entities/entity';
 import { EntityCollection } from '../entities/entity-collection';
+import { Entity } from '../interfaces/entity.interface';
 import { Position } from '../interfaces/position.interface';
 import { Spawner } from './spawner';
 import { Tile } from './tile';
+import { Entity as EntityClass } from '../entities/entity';
+import { EntityType } from '../types/entity-types.type';
 
 export class World {
   private readonly WIDTH = 24;
@@ -44,15 +46,19 @@ export class World {
     }
   }
 
+  existsOnPosition(position: Position, entity: EntityType): boolean {
+    return this.entities.existsOnPosition(position, entity);
+  }
+
   getPos(position: Position): Entity[] {
     return this.entities.getByPosition(position);
   }
 
-  tryGetPos({ x, y }: Position): Entity[] | undefined {
+  isValidCoordinate({ x, y }: Position): boolean {
     if (x < 0 || x >= this.WIDTH || y < 0 || y >= this.HEIGHT) {
-      return;
+      return false;
     }
 
-    return this.entities.getByPosition(x, y);
+    return true;
   }
 }

@@ -1,8 +1,8 @@
-import { Entity } from '../entities/entity';
 import { Grass } from '../entities/grass';
 import { Sheep } from '../entities/sheep';
 import { Wolf } from '../entities/wolf';
 import { getRandomPosition } from '../helpers/get-random-position.helper';
+import { Entity } from '../interfaces/entity.interface';
 import { World } from './world';
 
 export class Spawner {

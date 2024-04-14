@@ -1,5 +1,6 @@
+import { Entity } from '../interfaces/entity.interface';
 import { Position } from '../interfaces/position.interface';
-import { Entity } from './entity';
+import { EntityType } from '../types/entity-types.type';
 
 export class EntityCollection {
   private readonly entities: Map<string, Entity> = new Map<string, Entity>();
@@ -22,6 +23,10 @@ export class EntityCollection {
 
   remove(id: string) {
     this.entities.delete(id);
+  }
+
+  existsOnPosition(position: Position, type: EntityType): boolean {
+    return this.getByPosition(position).some((entity) => entity.type == type);
   }
 
   getByPosition(position: Position): Entity[];
