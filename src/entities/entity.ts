@@ -31,10 +31,7 @@ export abstract class Entity {
   move(): void {
     const targetPos = randomMove(this.position);
 
-    if (
-      this.world.isValidCoordinate(targetPos) &&
-      !this.world.existsOnPosition(targetPos, this.type)
-    ) {
+    if (this.world.isValidCoordinate(targetPos)) {
       this.position = targetPos;
     }
   }
