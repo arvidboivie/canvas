@@ -60,10 +60,10 @@ class Game {
     const squareX = Math.floor(x / this.SQUARE_SIDE);
     const squareY = Math.floor(y / this.SQUARE_SIDE);
 
-    const square = this.world.getPos(squareX, squareY);
+    const entities = this.world.getPos(squareX, squareY);
 
-    this.infoWindow.textContent = `${squareX}, ${squareY} ${square.entities
-      .map((entity) => entity.name)
+    this.infoWindow.textContent = `${squareX}, ${squareY} ${entities
+      .map((entity) => entity.type)
       .join(' ')}`;
 
     this.draw();
@@ -74,7 +74,7 @@ class Game {
 
     if (this.secondsPassed - this.previousGameLoop > 1 / this.FPS) {
       if (this.PLAY) {
-        // this.world.populate();
+        this.world.update();
       }
       this.previousGameLoop = this.secondsPassed;
     }
@@ -85,12 +85,7 @@ class Game {
 
   private draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    for (let x = 0; x < this.WIDTH; x++) {
-      for (let y = 0; y < this.HEIGHT; y++) {
-        let entity = this.world.getPos(x, y);
-        entity.draw(this.ctx)(this.SQUARE_SIDE);
-      }
-    }
+    this.world.draw(this.ctx, this.SQUARE_SIDE);
   }
 }
 

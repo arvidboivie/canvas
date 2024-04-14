@@ -26,6 +26,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["nanoid", "npm:5.0.7"],\
           ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"],\
           ["vite", "virtual:83e5aeb0022fe7710c03de254e3dd88157fb863027459c3d251a8926ad752bae4077982df09559efa2890aa7236993ecc5e40f93c306c01ab8c10948fbc3e363#npm:5.2.6"]\
         ],\
@@ -539,6 +540,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["canvas", "workspace:."],\
+          ["nanoid", "npm:5.0.7"],\
           ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"],\
           ["vite", "virtual:83e5aeb0022fe7710c03de254e3dd88157fb863027459c3d251a8926ad752bae4077982df09559efa2890aa7236993ecc5e40f93c306c01ab8c10948fbc3e363#npm:5.2.6"]\
         ],\
@@ -1055,6 +1057,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/nanoid-npm-3.3.7-98824ba130-10c0.zip/node_modules/nanoid/",\
         "packageDependencies": [\
           ["nanoid", "npm:3.3.7"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:5.0.7", {\
+        "packageLocation": "../../.yarn/berry/cache/nanoid-npm-5.0.7-3671c17ef0-10c0.zip/node_modules/nanoid/",\
+        "packageDependencies": [\
+          ["nanoid", "npm:5.0.7"]\
         ],\
         "linkType": "HARD"\
       }]\

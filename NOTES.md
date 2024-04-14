@@ -1,5 +1,4 @@
-## Update
+# Entities
 
-1. Get "preferred" update from every entity
-2. Compare "preferred" for conflicts, denying updates if needed
-3. Resolve updates
+Create EntityCollection class
+do `update()` then `resolve()`
