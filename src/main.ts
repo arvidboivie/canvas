@@ -6,7 +6,7 @@ class Game {
   private readonly HEIGHT = 16;
   private readonly SQUARE_SIDE = 20;
   private PLAY = true;
-  private readonly FPS = 1;
+  private readonly FPS = 2;
 
   private secondsPassed: number = 0;
   private previousGameLoop: number = 0;
@@ -63,7 +63,7 @@ class Game {
     const entities = this.world.getPos({ x: squareX, y: squareY });
 
     this.infoWindow.textContent = `${squareX}, ${squareY} ${entities
-      .map((entity) => entity.type)
+      .map((entity) => entity.name)
       .join(' ')}`;
 
     this.draw();

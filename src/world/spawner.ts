@@ -1,11 +1,12 @@
 import { Entity } from '../entities/entity';
+import { Grass } from '../entities/grass';
 import { Sheep } from '../entities/sheep';
 import { Wolf } from '../entities/wolf';
-import { getRandomNumber } from '../helpers/get-random-int.helper';
+import { getRandomPosition } from '../helpers/get-random-position.helper';
 import { World } from './world';
 
 export class Spawner {
-  static entities = [Sheep, Wolf];
+  static entities = [Sheep, Wolf, Grass];
   static spawnTicks = 100;
 
   static spawn(world: World, width: number, height: number): Entity[] {
@@ -15,11 +16,7 @@ export class Spawner {
       for (let i = 0; i < this.spawnTicks; i++) {
         if (Math.random() < entityType.spawnRate) {
           spawnedEntities.push(
-            new entityType(
-              world,
-              getRandomNumber(width),
-              getRandomNumber(height)
-            )
+            new entityType(world, getRandomPosition(width, height))
           );
         }
       }

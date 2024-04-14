@@ -11,7 +11,6 @@ export abstract class Entity {
   static readonly spawnRate = 0.3;
 
   public state: 'ALIVE' | 'DEAD';
-  protected position: Position;
 
   get x() {
     return this.position.x;
@@ -21,10 +20,9 @@ export abstract class Entity {
     return this.position.y;
   }
 
-  constructor(readonly world: World, x: number, y: number) {
+  constructor(readonly world: World, protected position: Position) {
     this.id = nanoid(5);
     this.state = 'ALIVE';
-    this.position = { x, y };
   }
 
   abstract act(): void;

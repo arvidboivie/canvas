@@ -29,6 +29,10 @@ export class World {
     this.entities.remove(id);
   }
 
+  add(entity: Entity) {
+    this.entities.add([entity]);
+  }
+
   draw(ctx: CanvasRenderingContext2D, tileSize: number) {
     for (let x = 0; x < this.WIDTH; x++) {
       for (let y = 0; y < this.HEIGHT; y++) {

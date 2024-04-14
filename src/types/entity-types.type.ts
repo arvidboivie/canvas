@@ -1,1 +1,1 @@
-export type EntityType = `SHEEP` | `WOLF`;
+export type EntityType = `SHEEP` | `WOLF` | `GRASS`;
