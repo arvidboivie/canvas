@@ -3,17 +3,13 @@ import { Entity } from '../interfaces/entity.interface';
 import { Position } from '../interfaces/position.interface';
 import { Spawner } from './spawner';
 import { Tile } from './tile';
-import { Entity as EntityClass } from '../entities/entity';
 import { EntityType } from '../types/entity-types.type';
 
 export class World {
-  private readonly WIDTH = 24;
-  private readonly HEIGHT = 16;
-
   private tileMap: Tile[][] = [];
   private entities: EntityCollection = new EntityCollection();
 
-  populate() {
+  constructor(private readonly WIDTH: number, private readonly HEIGHT: number) {
     this.tileMap = [...Array(this.WIDTH)].map((_valx, x) =>
       [...Array(this.HEIGHT)].map((_valy, y) => new Tile(x, y))
     );

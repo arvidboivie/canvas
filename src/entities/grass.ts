@@ -7,7 +7,7 @@ import { Entity } from './entity';
 export class Grass extends Entity {
   readonly type = `GRASS`;
   readonly symbol = '🌱';
-  static spawnRate = 0.4;
+  static spawnRate = 0.2;
 
   private growthRate = 3;
   private age = 0;

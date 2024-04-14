@@ -7,7 +7,7 @@ import { Entity } from './entity';
 export class Wolf extends Entity {
   readonly type = `WOLF`;
   readonly symbol = '🐺';
-  static spawnRate = 0.2;
+  static spawnRate = 0.1;
 
   private hunger: number;
   private maxHunger: number;
@@ -16,7 +16,7 @@ export class Wolf extends Entity {
     super(world, position);
 
     this.hunger = getRandomNumber(3);
-    this.maxHunger = getRandomBetween(35, 50);
+    this.maxHunger = getRandomBetween(60, 100);
   }
 
   act() {
@@ -31,10 +31,18 @@ export class Wolf extends Entity {
 
     const occupants = this.world.getPos(this.position);
 
-    for (const occupant of occupants) {
-      if (occupant.type === 'SHEEP') {
-        console.log(`Wolf ${this.id} ate sheep at ${this.x}, ${this.y}`);
-        occupant.die();
+    occupantLoop: for (const occupant of occupants) {
+      if (occupant.id == this.id) {
+        continue;
+      }
+      switch (occupant.type) {
+        case `SHEEP`:
+          console.log(`Wolf ${this.id} ate sheep at ${this.x}, ${this.y}`);
+          this.hunger = 0;
+          occupant.die();
+          break occupantLoop;
+        default:
+          continue;
       }
     }
   }

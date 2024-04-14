@@ -2,8 +2,8 @@ import { getRealMousePosition } from './helpers/get-real-mouse-position.helper';
 import { World } from './world/world';
 
 class Game {
-  private readonly WIDTH = 24;
-  private readonly HEIGHT = 16;
+  private readonly WIDTH = 40;
+  private readonly HEIGHT = 30;
   private readonly SQUARE_SIDE = 20;
   private PLAY = true;
   private readonly FPS = 2;
@@ -48,8 +48,7 @@ class Game {
     document.body.appendChild(this.infoWindow);
     document.body.appendChild(this.pauseButton);
 
-    this.world = new World();
-    this.world.populate();
+    this.world = new World(this.WIDTH, this.HEIGHT);
 
     requestAnimationFrame(this.loop);
   }
