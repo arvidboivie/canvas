@@ -2,9 +2,9 @@ import { getRealMousePosition } from './helpers/get-real-mouse-position.helper';
 import { World } from './world/world';
 
 class Game {
-  private readonly WIDTH = 40;
-  private readonly HEIGHT = 30;
-  private readonly SQUARE_SIDE = 20;
+  private readonly WIDTH = 60;
+  private readonly HEIGHT = 40;
+  private readonly SQUARE_SIDE = 10;
   private PLAY = true;
   private readonly FPS = 2;
 
