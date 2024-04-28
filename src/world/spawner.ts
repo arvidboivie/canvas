@@ -7,7 +7,7 @@ import { World } from './world';
 
 export class Spawner {
   static entities = [Sheep, Wolf, Grass];
-  static spawnTicks = 200;
+  static spawnTicks = 100;
 
   static spawn(world: World, width: number, height: number): Entity[] {
     const spawnedEntities = [];

@@ -1,11 +1,12 @@
 export class Tile {
   x: number;
   y: number;
-  color: string = 'green';
+  color: 'green' | 'blue';
 
-  constructor(x: number, y: number) {
+  constructor(x: number, y: number, color: 'green' | 'blue') {
     this.x = x;
     this.y = y;
+    this.color = color;
   }
 
   draw(ctx: CanvasRenderingContext2D) {

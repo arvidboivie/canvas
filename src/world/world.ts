@@ -4,15 +4,19 @@ import { Position } from '../interfaces/position.interface';
 import { Spawner } from './spawner';
 import { Tile } from './tile';
 import { EntityType } from '../types/entity-types.type';
+import { TileFactory } from './tile.factory';
 
 export class World {
   private tileMap: Tile[][] = [];
   private entities: EntityCollection = new EntityCollection();
 
   constructor(private readonly WIDTH: number, private readonly HEIGHT: number) {
-    this.tileMap = [...Array(this.WIDTH)].map((_valx, x) =>
-      [...Array(this.HEIGHT)].map((_valy, y) => new Tile(x, y))
-    );
+    for (let x = 0; x < this.WIDTH; x++) {
+      this.tileMap[x] = [];
+      for (let y = 0; y < this.HEIGHT; y++) {
+        this.tileMap[x][y] = TileFactory.create(this, { x, y });
+      }
+    }
 
     this.entities.add(Spawner.spawn(this, this.WIDTH, this.HEIGHT));
   }
@@ -39,6 +43,12 @@ export class World {
           .getByPosition(x, y)
           .forEach((entity) => entity.draw(ctx)(x, y, tileSize));
       }
+    }
+  }
+
+  tileOnPosition(position: Position): Tile | undefined {
+    if (this.isValidCoordinate(position)) {
+      return this.tileMap[position.x][position.y];
     }
   }
 

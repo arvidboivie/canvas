@@ -3,7 +3,7 @@ import { World } from './world/world';
 
 class Game {
   private readonly WIDTH = 60;
-  private readonly HEIGHT = 40;
+  private readonly HEIGHT = 80;
   private readonly SQUARE_SIDE = 10;
   private PLAY = true;
   private readonly FPS = 2;
